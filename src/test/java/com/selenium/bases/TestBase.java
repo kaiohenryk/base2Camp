@@ -1,14 +1,18 @@
-package com.selenium.tests;
+package com.selenium.bases;
 
 import com.selenium.GlobalParameters;
 import com.selenium.utils.DriverFactory;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
-public class test {
-
-    @Test
-    public void inicial() {
+public class TestBase {
+    @BeforeClass
+    public static void beforeSuite() {
         new GlobalParameters();
+    }
+
+    @Before
+    public void beforeEachTest() {
         DriverFactory.createInstance();
         DriverFactory.INSTANCE.manage().window().maximize();
         DriverFactory.INSTANCE.navigate().to(GlobalParameters.URL_DEFAULT);
