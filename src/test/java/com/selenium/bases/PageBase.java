@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -40,5 +41,19 @@ public class PageBase {
     protected String getUrl() {
         String url = driver.getCurrentUrl();
         return url;
+    }
+
+    protected void clickLink(By locator) {
+        waitForElement(locator).click();
+    }
+
+    protected void comboBoxSelectByVisibleText(By locator, String text) {
+        Select comboBox = new Select(waitForElement(locator));
+        comboBox.selectByVisibleText(text);
+    }
+
+    protected String getPageSource() {
+        String pageSource = driver.getPageSource();
+        return pageSource;
     }
 }
