@@ -24,8 +24,8 @@ public class BugReportPage extends PageBase {
         comboBoxSelectByVisibleText(reproducibilityComboBox, reprodutibilidade);
     }
 
-    public void selecionarGravidade(String gravidade) {
-        comboBoxSelectByVisibleText(severityComboBox, gravidade);
+    public void selecionarSeveridade(String severidade) {
+        comboBoxSelectByVisibleText(severityComboBox, severidade);
     }
 
     public void selecionarPrioridade(String prioridade) {
@@ -36,8 +36,8 @@ public class BugReportPage extends PageBase {
         comboBoxSelectByVisibleText(selectProfileComboBox, perfil);
     }
 
-    public void selecionarPessoaAtribuida(String nome) {
-        comboBoxSelectByVisibleText(assignToComboBox, nome);
+    public void selecionarPessoaAtribuida(String pessoaAtribuida) {
+        comboBoxSelectByVisibleText(assignToComboBox, pessoaAtribuida);
     }
 
     public void preencherResumo(String resumo) {

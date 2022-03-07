@@ -27,8 +27,8 @@ public class BugReportTest extends TestBase {
         bugReportPage = new BugReportPage();
 
         //Parameters
-        String usuario = GlobalParameters.USUARIO_PADRAO;
-        String senha = GlobalParameters.SENHA_PADRAO;
+        String usuario = GlobalParameters.USUARIO_DEFAULT;
+        String senha = GlobalParameters.SENHA_DEFAULT;
         String projeto = "Fabiana Carvalho´s Project";
         String categoria = "[All Projects] Teste";
         String reprodutibilidade = "random";
@@ -44,10 +44,10 @@ public class BugReportTest extends TestBase {
         loginFlows.efetuarLogin(usuario, senha);
         myViewPage.clicarLinkReportIssue();
         selectProjectPage.escolherProjeto(projeto);
-        selectProjectPage.clicarBotaoSelectProject();
+        selectProjectPage.clicarNoBotaoSelecionarProjeto();
         bugReportPage.selecionarCategoria(categoria);
         bugReportPage.selecionarReprodutibilidade(reprodutibilidade);
-        bugReportPage.selecionarGravidade(severidade);
+        bugReportPage.selecionarSeveridade(severidade);
         bugReportPage.selecionarPrioridade(prioridade);
         bugReportPage.selecionarPerfil(perfil);
         bugReportPage.selecionarPessoaAtribuida(pessoaAtribuida);

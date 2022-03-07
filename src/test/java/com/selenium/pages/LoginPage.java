@@ -1,6 +1,5 @@
 package com.selenium.pages;
 
-import com.selenium.GlobalParameters;
 import com.selenium.bases.PageBase;
 import org.openqa.selenium.By;
 

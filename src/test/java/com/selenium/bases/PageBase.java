@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class PageBase {
-    //Variaveis globais
+    //Global variables
     protected WebDriver driver;
     protected WebDriverWait wait;
 

@@ -13,7 +13,7 @@ public class SelectProjectPage extends PageBase {
         comboBoxSelectByVisibleText(projectComboBox, nomeProjeto);
     }
 
-    public void clicarBotaoSelectProject() {
+    public void clicarNoBotaoSelecionarProjeto() {
         click(selectProjectButton);
     }
 }

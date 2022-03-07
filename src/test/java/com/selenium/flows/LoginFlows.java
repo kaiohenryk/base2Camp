@@ -7,6 +7,7 @@ public class LoginFlows {
     LoginPage loginPage;
 
     public LoginFlows() {
+        //Page and Steps Objects
         loginPage = new LoginPage();
     }
 
