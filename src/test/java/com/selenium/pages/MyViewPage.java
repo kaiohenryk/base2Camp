@@ -9,6 +9,6 @@ public class MyViewPage extends PageBase {
 
     //Actions
     public void clicarLinkReportIssue() {
-        clickLink(linkText);
+        clickLinkText(linkText);
     }
 }

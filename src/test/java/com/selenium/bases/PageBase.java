@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class PageBase {
     //Global variables
@@ -34,17 +35,20 @@ public class PageBase {
         waitForElement(locator).click();
     }
 
+    protected void clickLinkText(By locator) {
+        waitForElement(locator).click();
+    }
+
+    protected void clickPartialLink(By locator) {
+        waitForElement(locator).click();
+    }
+
     protected void sendKeys(By locator, String text) {
         waitForElement(locator).sendKeys(text);
     }
 
-    protected String getUrl() {
-        String url = driver.getCurrentUrl();
-        return url;
-    }
-
-    protected void clickLink(By locator) {
-        waitForElement(locator).click();
+    protected void clear(By locator) {
+        waitForElement(locator).clear();
     }
 
     protected void comboBoxSelectByVisibleText(By locator, String text) {
@@ -52,8 +56,18 @@ public class PageBase {
         comboBox.selectByVisibleText(text);
     }
 
+    protected String getUrl() {
+        String url = driver.getCurrentUrl();
+        return url;
+    }
+
     protected String getPageSource() {
         String pageSource = driver.getPageSource();
         return pageSource;
+    }
+
+    protected String getText(By locator) {
+        String text = waitForElement(locator).getText();
+        return text;
     }
 }
