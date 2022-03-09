@@ -14,6 +14,7 @@ public class BugReportPage extends PageBase {
     By summaryField = By.name("summary");
     By descriptionTextArea = By.name("description");
     By submitReportButton = By.cssSelector("input[value='Submit Report']");
+    By successMessage = By.xpath("//div[contains(text(),'Operation successful.')]");
 
     //Actions
     public void selecionarCategoria(String categoria) {
@@ -53,6 +54,6 @@ public class BugReportPage extends PageBase {
     }
 
     public String retornaMensagemSucesso() {
-        return getPageSource();
+        return getText(successMessage);
     }
 }

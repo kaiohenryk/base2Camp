@@ -2,6 +2,7 @@ package com.selenium.bases;
 
 import com.selenium.GlobalParameters;
 import com.selenium.utils.DriverFactory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
@@ -17,5 +18,10 @@ public class TestBase {
         DriverFactory.createInstance();
         DriverFactory.INSTANCE.manage().window().maximize();
         DriverFactory.INSTANCE.navigate().to(GlobalParameters.URL_DEFAULT);
+    }
+
+    @After
+    public void afterTest() {
+        DriverFactory.quitInstance();
     }
 }

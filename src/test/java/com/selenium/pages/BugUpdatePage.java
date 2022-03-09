@@ -7,7 +7,8 @@ public class BugUpdatePage extends PageBase {
     //Mapping
     By summaryField = By.name("summary");
     By updateInformationButton = By.cssSelector("input[value='Update Information']");
-    By changedText = By.xpath("//td[.='Summary']/../td[contains(text(), 'Teste de edição')]");
+    //By changedText = By.xpath("//td[.='Summary']/../td[contains(text(), 'Teste de edição')]");
+    By priorityComboBox = By.name("priority");
 
     //Actions
     public void apagarResumo() {
@@ -22,7 +23,11 @@ public class BugUpdatePage extends PageBase {
         click(updateInformationButton);
     }
 
-    public String resumoAlterado() {
-        return getText(changedText);
+//    public String retornaResumo() {
+//        return getText(changedText);
+//    }
+
+    public void selecionarNovoNivelPrioridade(String prioridade){
+        comboBoxSelectByVisibleText(priorityComboBox, prioridade);
     }
 }
