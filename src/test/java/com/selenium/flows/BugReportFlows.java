@@ -22,6 +22,6 @@ public class BugReportFlows {
         bugReportPage.selecionarPessoaAtribuida(pessoaAtribuida);
         bugReportPage.preencherResumo(resumo);
         bugReportPage.preencherDescricao(descricao);
-        bugReportPage.clicarBotaoEnviarRelatorio();
+        bugReportPage.clicarNoBotaoEnviarRelatorio();
     }
 }

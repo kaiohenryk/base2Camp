@@ -9,7 +9,7 @@ public class SelectProjectPage extends PageBase {
     By selectProjectButton = By.cssSelector("input[value='Select Project']");
 
     //Actions
-    public void escolherProjeto(String nomeProjeto) {
+    public void selecionarProjeto(String nomeProjeto) {
         comboBoxSelectByVisibleText(projectComboBox, nomeProjeto);
     }
 

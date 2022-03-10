@@ -8,7 +8,7 @@ public class MyViewPage extends PageBase {
     By linkText = By.linkText("Report Issue");
 
     //Actions
-    public void clicarLinkReportIssue() {
+    public void clicarEmReportarProblema() {
         clickLinkText(linkText);
     }
 }

@@ -49,7 +49,7 @@ public class BugReportPage extends PageBase {
         sendKeys(descriptionTextArea, descricao);
     }
 
-    public void clicarBotaoEnviarRelatorio() {
+    public void clicarNoBotaoEnviarRelatorio() {
         click(submitReportButton);
     }
 
