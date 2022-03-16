@@ -22,6 +22,6 @@ public class TestBase {
 
     @After
     public void afterTest() {
-        DriverFactory.quitInstance();
+       DriverFactory.quitInstance();
     }
 }

@@ -3,6 +3,7 @@ package com.selenium.tests;
 import com.selenium.GlobalParameters;
 import com.selenium.bases.TestBase;
 import com.selenium.pages.LoginPage;
+import com.selenium.pages.MyViewPage;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ import org.junit.Test;
 public class LoginTest extends TestBase {
     //Objects
     LoginPage loginPage;
+    MyViewPage myViewPage;
 
     //Tests
     @Test
@@ -17,6 +19,7 @@ public class LoginTest extends TestBase {
 
         //Obejects instances
         loginPage = new LoginPage();
+        myViewPage = new MyViewPage();
 
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
@@ -27,6 +30,6 @@ public class LoginTest extends TestBase {
         loginPage.preencherSenha(senha);
         loginPage.clicarNoBotaoLogin();
 
-        Assert.assertEquals(paginaInicialEsperada, loginPage.retornaURLPaginaInicial());
+        Assert.assertEquals(paginaInicialEsperada, myViewPage.retornaURLPaginaInicial());
     }
 }

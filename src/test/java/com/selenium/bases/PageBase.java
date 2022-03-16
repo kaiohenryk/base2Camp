@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PageBase {
@@ -68,6 +69,15 @@ public class PageBase {
 
     protected String getText(By locator) {
         String text = waitForElement(locator).getText();
+        return text;
+    }
+
+    protected List<String> getTextList(By locator) {
+        List<WebElement> elements = driver.findElements(locator);
+        List<String> text = new ArrayList();
+        for (WebElement element : elements) {
+            text.add(element.getText());
+        }
         return text;
     }
 }

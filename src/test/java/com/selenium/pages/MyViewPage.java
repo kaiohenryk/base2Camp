@@ -8,6 +8,10 @@ public class MyViewPage extends PageBase {
     By linkText = By.linkText("Report Issue");
 
     //Actions
+    public String retornaURLPaginaInicial() {
+        return getUrl();
+    }
+
     public void clicarEmReportarProblema() {
         clickLinkText(linkText);
     }

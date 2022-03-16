@@ -21,8 +21,4 @@ public class LoginPage extends PageBase {
     public void clicarNoBotaoLogin() {
         click(loginButton);
     }
-
-    public String retornaURLPaginaInicial() {
-        return getUrl();
-    }
 }

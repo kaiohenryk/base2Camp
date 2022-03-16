@@ -20,6 +20,7 @@ public class BugTests extends TestBase {
     BugUpdatePage bugUpdatePage;
     ViewPage viewPage;
     BugChangeStatusPage bugChangeStatusPage;
+    BugActionGroupPage bugActionGroupPage;
 
     //Tests
     @Test
@@ -135,7 +136,7 @@ public class BugTests extends TestBase {
         bugUpdatePage.selecionarPrioridade(novoNivelPrioridade);
         bugUpdatePage.clicarEmAtualizarInformacao();
 
-        Assert.assertEquals(novoNivelPrioridade, viewPage.retornaPrioridadeDoBug());
+        Assert.assertEquals(novoNivelPrioridade, viewPage.retornaPrioridadeDoBug(novoNivelPrioridade));
     }
 
     @Test
@@ -178,7 +179,7 @@ public class BugTests extends TestBase {
         bugChangeStatusPage.adicionarNota(nota);
         bugChangeStatusPage.clicarEmResolverProblema();
 
-        Assert.assertEquals(status, viewPage.retornaStatusDoBug());
+        Assert.assertEquals(status, viewPage.retornaStatusAtualDoBug(status));
     }
 
     @Test
@@ -219,6 +220,45 @@ public class BugTests extends TestBase {
         bugChangeStatusPage.adicionarNota(nota);
         bugChangeStatusPage.clicarEmFecharProblema();
 
-        Assert.assertEquals(status, viewPage.retornaStatusAtualDoBug());
+        Assert.assertEquals(status, viewPage.retornaStatusAtualDoBug(status));
+    }
+
+    @Test
+    public void excluirBug() {
+
+        //Objects instances
+        loginFlows = new LoginFlows();
+        myViewPage = new MyViewPage();
+        selectProjectFlows = new SelectProjectFlows();
+        bugReportFlows = new BugReportFlows();
+        viewAllBugPage = new ViewAllBugPage();
+        viewPage = new ViewPage();
+        bugActionGroupPage = new BugActionGroupPage();
+
+        //Parameters
+        String usuario = GlobalParameters.USUARIO_DEFAULT;
+        String senha = GlobalParameters.SENHA_DEFAULT;
+        String projeto = "Fabiana Carvalho´s Project";
+        String categoria = "[All Projects] Teste Caio";
+        String reprodutibilidade = "random";
+        String severidade = "major";
+        String prioridade = "normal";
+        String perfil = "Desktop Windows 10";
+        String pessoaAtribuida = "caio.carvalho";
+        String resumo = "Teste do Caio";
+        String descricao = "Projeto final do Base2camp";
+        String idDoBug;
+
+        //Test
+        loginFlows.efetuarLogin(usuario, senha);
+        myViewPage.clicarEmReportarProblema();
+        selectProjectFlows.selecionarProjeto(projeto);
+        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        idDoBug = viewAllBugPage.obterIDDoBug();
+        viewAllBugPage.clicarNoIdDoBug();
+        viewPage.clicarEmExcluir();
+        bugActionGroupPage.clicarEmExcluirProblema();
+
+        Assert.assertFalse(viewAllBugPage.listaDeBugsCadastrados().contains(idDoBug));
     }
 }
