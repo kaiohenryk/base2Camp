@@ -9,6 +9,8 @@ import com.selenium.pages.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class BugTests extends TestBase {
     //Objects
     LoginFlows loginFlows;
@@ -125,7 +127,7 @@ public class BugTests extends TestBase {
         String pessoaAtribuida = "caio.carvalho";
         String resumo = "Teste do Caio";
         String descricao = "Projeto final do Base2camp";
-        String novoNivelPrioridade = "urgent";
+        String novaPrioridade = "urgent";
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
@@ -133,10 +135,10 @@ public class BugTests extends TestBase {
         selectProjectFlows.selecionarProjeto(projeto);
         bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
         viewAllBugPage.clicarEmEditar();
-        bugUpdatePage.selecionarPrioridade(novoNivelPrioridade);
+        bugUpdatePage.selecionarPrioridade(novaPrioridade);
         bugUpdatePage.clicarEmAtualizarInformacao();
 
-        Assert.assertEquals(novoNivelPrioridade, viewPage.retornaPrioridadeDoBug(novoNivelPrioridade));
+        Assert.assertEquals(novaPrioridade, viewPage.retornaPrioridadeDoBug(novaPrioridade));
     }
 
     @Test
@@ -254,11 +256,47 @@ public class BugTests extends TestBase {
         myViewPage.clicarEmReportarProblema();
         selectProjectFlows.selecionarProjeto(projeto);
         bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
-        idDoBug = viewAllBugPage.obterIDDoBug();
+        idDoBug = viewAllBugPage.obterIdDoBug();
         viewAllBugPage.clicarNoIdDoBug();
         viewPage.clicarEmExcluir();
         bugActionGroupPage.clicarEmExcluirProblema();
 
         Assert.assertFalse(viewAllBugPage.listaDeBugsCadastrados().contains(idDoBug));
+    }
+
+    @Test
+    public void filtrarBugPorId() {
+        //Objects instances
+        loginFlows = new LoginFlows();
+        myViewPage = new MyViewPage();
+        selectProjectFlows = new SelectProjectFlows();
+        bugReportFlows = new BugReportFlows();
+        viewAllBugPage = new ViewAllBugPage();
+
+        //Parameters
+        String usuario = GlobalParameters.USUARIO_DEFAULT;
+        String senha = GlobalParameters.SENHA_DEFAULT;
+        String projeto = "Fabiana Carvalho´s Project";
+        String categoria = "[All Projects] Teste";
+        String reprodutibilidade = "random";
+        String severidade = "major";
+        String prioridade = "urgent";
+        String perfil = "Desktop Windows 10";
+        String pessoaAtribuida = "caio.carvalho";
+        String resumo = "Teste do Caio";
+        String descricao = "Projeto final do Base2camp";
+        String idDoBug;
+        int quantidadeDeRegistrosEsperados = 1;
+
+        //Test
+        loginFlows.efetuarLogin(usuario, senha);
+        myViewPage.clicarEmReportarProblema();
+        selectProjectFlows.selecionarProjeto(projeto);
+        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        idDoBug = viewAllBugPage.obterIdDoBug();
+        viewAllBugPage.preencherCampoProcurar(idDoBug);
+        viewAllBugPage.clicarEmAplicarFiltro();
+
+        Assert.assertEquals(quantidadeDeRegistrosEsperados, viewAllBugPage.quantidadeDeRegistrosEncontrados().size());
     }
 }

@@ -80,4 +80,9 @@ public class PageBase {
         }
         return text;
     }
+
+    protected List<WebElement> listOfElements(By locator) {
+        List<WebElement> elements = DriverFactory.INSTANCE.findElements(locator);
+        return elements;
+    }
 }

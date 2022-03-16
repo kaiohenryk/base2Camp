@@ -13,21 +13,36 @@ public class ViewAllBugPage extends PageBase {
     //By partialLinkId = By.xpath("//table[@id='buglist']//a[contains(@href, '/view.php?id=')]");
     By partialLinkId = By.cssSelector("td > a[href^='/view.php?id=']");
     By bugTable = By.id("buglist");
+    By searchField = By.name("search");
+    By applyFilterButton = By.name("filter");
+    By bugTableRecords = By.xpath("//table[@id='buglist']//tr[@border='1']");
 
     //Actions
-    public void clicarEmEditar(){
-       clickPartialLink(partialLinkEdit);
+    public void clicarEmEditar() {
+        clickPartialLink(partialLinkEdit);
     }
 
-    public void clicarNoIdDoBug(){
+    public void clicarNoIdDoBug() {
         clickPartialLink(partialLinkId);
     }
 
-    public String obterIDDoBug(){
+    public String obterIdDoBug() {
         return getText(partialLinkId);
     }
 
-    public List<String> listaDeBugsCadastrados(){
+    public List<String> listaDeBugsCadastrados() {
         return getTextList(bugTable);
+    }
+
+    public void preencherCampoProcurar(String idDoBug) {
+        sendKeys(searchField, idDoBug);
+    }
+
+    public void clicarEmAplicarFiltro() {
+        click(applyFilterButton);
+    }
+
+    public List<WebElement> quantidadeDeRegistrosEncontrados() {
+        return listOfElements(bugTableRecords);
     }
 }
