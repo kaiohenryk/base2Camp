@@ -31,6 +31,7 @@ public class BugTests extends TestBase {
         myViewPage = new MyViewPage();
         selectProjectFlows = new SelectProjectFlows();
         bugReportPage = new BugReportPage();
+        viewAllBugPage = new ViewAllBugPage();
 
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
@@ -100,6 +101,44 @@ public class BugTests extends TestBase {
 
         Assert.assertTrue(viewPage.retornaResumoDoBug(novoResumo).contains(novoResumo));
     }
+
+    @Test
+    public void alterarDescricaoDoBug() {
+        //Objects instances
+        loginFlows = new LoginFlows();
+        myViewPage = new MyViewPage();
+        selectProjectFlows = new SelectProjectFlows();
+        bugReportFlows = new BugReportFlows();
+        viewAllBugPage = new ViewAllBugPage();
+        bugUpdatePage = new BugUpdatePage();
+        viewPage = new ViewPage();
+
+        //Parameters
+        String usuario = GlobalParameters.USUARIO_DEFAULT;
+        String senha = GlobalParameters.SENHA_DEFAULT;
+        String projeto = "Fabiana Carvalho´s Project";
+        String categoria = "[All Projects] Teste Caio";
+        String reprodutibilidade = "random";
+        String severidade = "major";
+        String prioridade = "normal";
+        String perfil = "Desktop Windows 10";
+        String pessoaAtribuida = "caio.carvalho";
+        String resumo = "Teste do Caio";
+        String descricao = "Projeto final do Base2camp";
+        String novaDescricao = "Alterando a descrição do Bug";
+
+        //Test
+        loginFlows.efetuarLogin(usuario, senha);
+        myViewPage.clicarEmReportarProblema();
+        selectProjectFlows.selecionarProjeto(projeto);
+        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        viewAllBugPage.clicarEmEditar();
+        bugUpdatePage.preencherDescricao(novaDescricao);
+        bugUpdatePage.clicarEmAtualizarInformacao();
+
+        Assert.assertEquals(novaDescricao, viewPage.retornaDescricaoDoBug(novaDescricao));
+    }
+
 
     @Test
     public void alterarPrioridadeDoBugParaUrgente() {
@@ -179,11 +218,12 @@ public class BugTests extends TestBase {
         bugChangeStatusPage.adicionarNota(nota);
         bugChangeStatusPage.clicarEmResolverProblema();
 
-        Assert.assertEquals(status, viewPage.retornaStatusAtualDoBug(status));
+        Assert.assertEquals(status, viewPage.retornaStatusDoBug(status));
     }
 
     @Test
     public void fecharBugComSucesso() {
+
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
@@ -220,7 +260,7 @@ public class BugTests extends TestBase {
         bugChangeStatusPage.adicionarNota(nota);
         bugChangeStatusPage.clicarEmFecharProblema();
 
-        Assert.assertEquals(status, viewPage.retornaStatusAtualDoBug(status));
+        Assert.assertEquals(status, viewPage.retornaStatusDoBug(status));
     }
 
     @Test
@@ -259,7 +299,7 @@ public class BugTests extends TestBase {
         viewPage.clicarEmExcluir();
         bugActionGroupPage.clicarEmExcluirProblema();
 
-        Assert.assertFalse(viewAllBugPage.listaDeBugsCadastrados().contains(idDoBug));
+        Assert.assertFalse(viewAllBugPage.IdDosBugsCadastrados().contains(idDoBug));
     }
 
     @Test
@@ -294,15 +334,14 @@ public class BugTests extends TestBase {
         idDoBug = viewAllBugPage.obterIdDoBug();
         viewAllBugPage.preencherCampoProcurar(idDoBug);
         viewAllBugPage.clicarEmAplicarFiltro();
-        System.out.println(idDoBug);//
-        System.out.println(viewAllBugPage.listaDeBugsCadastrados());//
 
         Assert.assertEquals(quantidadeDeRegistrosEsperados, viewAllBugPage.quantidadeDeRegistrosEncontrados().size());
-        Assert.assertTrue(viewAllBugPage.listaDeBugsCadastrados().contains(idDoBug));
+        Assert.assertTrue(viewAllBugPage.IdDosBugsCadastrados().contains(idDoBug));
     }
 
     @Test
     public void filtrarBugPorResumo() {
+
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();

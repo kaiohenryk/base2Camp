@@ -28,7 +28,7 @@ public class ViewAllBugPage extends PageBase {
         return getText(partialLinkId);
     }
 
-    public List<String> listaDeBugsCadastrados() {
+    public List<String> IdDosBugsCadastrados() {
         return getTextList(partialLinkId);
     }
 

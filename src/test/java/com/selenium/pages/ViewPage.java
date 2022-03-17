@@ -19,20 +19,20 @@ public class ViewPage extends PageBase {
         return getText(locatorDoResumoDoBug(resumo));
     }
 
-    private By locatorDaPrioridadeDoBug(String prioridade) {
-        return By.xpath("//table//td[.='" + prioridade + "']");
+    private By locatorDinamico(String textoDesejado) {
+        return By.xpath("//table//td[.='" + textoDesejado + "']");
+    }
+
+    public String retornaDescricaoDoBug(String descricao) {
+        return getText(locatorDinamico(descricao));
     }
 
     public String retornaPrioridadeDoBug(String prioridade) {
-        return getText(locatorDaPrioridadeDoBug(prioridade));
+        return getText(locatorDinamico(prioridade));
     }
 
-    private By locatorDoStatusDoBug(String status) {
-        return By.xpath("//table//td[.='" + status + "']");
-    }
-
-    public String retornaStatusAtualDoBug(String status) {
-        return getText(locatorDoStatusDoBug(status));
+    public String retornaStatusDoBug(String status) {
+        return getText(locatorDinamico(status));
     }
 
     public void selecionarStatus(String status) {
