@@ -6,7 +6,9 @@ import org.openqa.selenium.By;
 public class ViewPage extends PageBase {
     //Mapping
     By statusComboBox = By.name("new_status");
+    By assignToComboBox = By.name("handler_id");
     By changeStatusButton = By.cssSelector("input[value='Change Status To:']");
+    By assignToButton = By.cssSelector("input[value='Assign To:']");
     By closeButton = By.cssSelector("input[value='Close']");
     By deleteButton = By.cssSelector("input[value='Delete']");
 
@@ -35,12 +37,24 @@ public class ViewPage extends PageBase {
         return getText(locatorDinamico(status));
     }
 
+    public String retornaPessoaAtribuidaDoBug(String pessoaAtribuida) {
+        return getText(locatorDinamico(pessoaAtribuida));
+    }
+
     public void selecionarStatus(String status) {
         comboBoxSelectByVisibleText(statusComboBox, status);
     }
 
+    public void selecionarPessoaAtribuida(String pessoaAtribuida) {
+        comboBoxSelectByVisibleText(assignToComboBox, pessoaAtribuida);
+    }
+
     public void clicarEmAlterarStatus() {
         click(changeStatusButton);
+    }
+
+    public void clicarEmAtribuir() {
+        click(assignToButton);
     }
 
     public void clicarEmFechar() {

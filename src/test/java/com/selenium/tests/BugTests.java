@@ -139,6 +139,42 @@ public class BugTests extends TestBase {
         Assert.assertEquals(novaDescricao, viewPage.retornaDescricaoDoBug(novaDescricao));
     }
 
+    @Test
+    public void alterarPessoaAtribuidaDoBug() {
+
+        //Objects instances
+        loginFlows = new LoginFlows();
+        myViewPage = new MyViewPage();
+        selectProjectFlows = new SelectProjectFlows();
+        bugReportFlows = new BugReportFlows();
+        viewAllBugPage = new ViewAllBugPage();
+        viewPage = new ViewPage();
+
+        //Parameters
+        String usuario = GlobalParameters.USUARIO_DEFAULT;
+        String senha = GlobalParameters.SENHA_DEFAULT;
+        String projeto = "Fabiana Carvalho´s Project";
+        String categoria = "[All Projects] Teste Caio";
+        String reprodutibilidade = "random";
+        String severidade = "major";
+        String prioridade = "normal";
+        String perfil = "Desktop Windows 10";
+        String pessoaAtribuida = "caio.carvalho";
+        String resumo = "Teste do Caio";
+        String descricao = "Projeto final do Base2camp";
+        String novaPessoaAtribuida = "Treinamento07";
+
+        //Test
+        loginFlows.efetuarLogin(usuario, senha);
+        myViewPage.clicarEmReportarProblema();
+        selectProjectFlows.selecionarProjeto(projeto);
+        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        viewAllBugPage.clicarNoIdDoBug();
+        viewPage.selecionarPessoaAtribuida(novaPessoaAtribuida);
+        viewPage.clicarEmAtribuir();
+
+        Assert.assertEquals(novaPessoaAtribuida, viewPage.retornaPessoaAtribuidaDoBug(novaPessoaAtribuida));
+    }
 
     @Test
     public void alterarPrioridadeDoBugParaUrgente() {
