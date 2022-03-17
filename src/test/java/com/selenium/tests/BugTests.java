@@ -9,8 +9,6 @@ import com.selenium.pages.*;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 public class BugTests extends TestBase {
     //Objects
     LoginFlows loginFlows;
@@ -89,7 +87,7 @@ public class BugTests extends TestBase {
         String pessoaAtribuida = "caio.carvalho";
         String resumo = "Teste do Caio";
         String descricao = "Projeto final do Base2camp";
-        String novoResumo = "Teste de edição";
+        String novoResumo = "Editando";
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
@@ -100,7 +98,7 @@ public class BugTests extends TestBase {
         bugUpdatePage.preencherResumo(novoResumo);
         bugUpdatePage.clicarEmAtualizarInformacao();
 
-        Assert.assertTrue(viewPage.retornaResumoDoBug().contains(novoResumo));
+        Assert.assertTrue(viewPage.retornaResumoDoBug(novoResumo).contains(novoResumo));
     }
 
     @Test
@@ -296,7 +294,43 @@ public class BugTests extends TestBase {
         idDoBug = viewAllBugPage.obterIdDoBug();
         viewAllBugPage.preencherCampoProcurar(idDoBug);
         viewAllBugPage.clicarEmAplicarFiltro();
+        System.out.println(idDoBug);//
+        System.out.println(viewAllBugPage.listaDeBugsCadastrados());//
 
         Assert.assertEquals(quantidadeDeRegistrosEsperados, viewAllBugPage.quantidadeDeRegistrosEncontrados().size());
+        Assert.assertTrue(viewAllBugPage.listaDeBugsCadastrados().contains(idDoBug));
+    }
+
+    @Test
+    public void filtrarBugPorResumo() {
+        //Objects instances
+        loginFlows = new LoginFlows();
+        myViewPage = new MyViewPage();
+        selectProjectFlows = new SelectProjectFlows();
+        bugReportFlows = new BugReportFlows();
+        viewAllBugPage = new ViewAllBugPage();
+
+        //Parameters
+        String usuario = GlobalParameters.USUARIO_DEFAULT;
+        String senha = GlobalParameters.SENHA_DEFAULT;
+        String projeto = "Fabiana Carvalho´s Project";
+        String categoria = "[All Projects] Teste";
+        String reprodutibilidade = "random";
+        String severidade = "major";
+        String prioridade = "urgent";
+        String perfil = "Desktop Windows 10";
+        String pessoaAtribuida = "caio.carvalho";
+        String resumo = "Editanduuu";
+        String descricao = "Projeto final do Base2camp";
+
+        //Test
+        loginFlows.efetuarLogin(usuario, senha);
+        myViewPage.clicarEmReportarProblema();
+        selectProjectFlows.selecionarProjeto(projeto);
+        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        viewAllBugPage.preencherCampoProcurar(resumo);
+        viewAllBugPage.clicarEmAplicarFiltro();
+
+        Assert.assertTrue(viewAllBugPage.ResumoDosBugsCadastrados().contains(resumo));
     }
 }

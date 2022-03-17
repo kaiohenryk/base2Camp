@@ -5,15 +5,18 @@ import org.openqa.selenium.By;
 
 public class ViewPage extends PageBase {
     //Mapping
-    By summaryField = By.xpath("//td[.='Summary']/../td[contains(text(), 'Teste de edição')]");
     By statusComboBox = By.name("new_status");
     By changeStatusButton = By.cssSelector("input[value='Change Status To:']");
     By closeButton = By.cssSelector("input[value='Close']");
     By deleteButton = By.cssSelector("input[value='Delete']");
 
     //Actions
-    public String retornaResumoDoBug() {
-        return getText(summaryField);
+    private By locatorDoResumoDoBug(String resumo) {
+        return By.xpath("//td[.='Summary']/../td[contains(text(), '" + resumo + "')]");
+    }
+
+    public String retornaResumoDoBug(String resumo) {
+        return getText(locatorDoResumoDoBug(resumo));
     }
 
     private By locatorDaPrioridadeDoBug(String prioridade) {
@@ -21,7 +24,6 @@ public class ViewPage extends PageBase {
     }
 
     public String retornaPrioridadeDoBug(String prioridade) {
-//        return getText(priorityField);
         return getText(locatorDaPrioridadeDoBug(prioridade));
     }
 
