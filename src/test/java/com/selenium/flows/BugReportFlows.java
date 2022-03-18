@@ -3,6 +3,7 @@ package com.selenium.flows;
 import com.selenium.pages.BugReportPage;
 
 public class BugReportFlows {
+
     //Objects and constructor
     BugReportPage bugReportPage;
 

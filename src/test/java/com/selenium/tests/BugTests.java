@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BugTests extends TestBase {
+
     //Objects
     LoginFlows loginFlows;
     MyViewPage myViewPage;
@@ -31,7 +32,6 @@ public class BugTests extends TestBase {
         myViewPage = new MyViewPage();
         selectProjectFlows = new SelectProjectFlows();
         bugReportPage = new BugReportPage();
-        viewAllBugPage = new ViewAllBugPage();
 
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;

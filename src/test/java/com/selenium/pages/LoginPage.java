@@ -4,10 +4,12 @@ import com.selenium.bases.PageBase;
 import org.openqa.selenium.By;
 
 public class LoginPage extends PageBase {
+
     //Mapping
     By usernameField = By.name("username");
     By passwordField = By.name("password");
     By loginButton = By.cssSelector("input[value='Login']");
+    By errorMessage = By.xpath("//div//font[@color='red']");
 
     //Actions
     public void preencherUsuario(String usuario) {
@@ -20,5 +22,9 @@ public class LoginPage extends PageBase {
 
     public void clicarNoBotaoLogin() {
         click(loginButton);
+    }
+
+    public String retornaMensagemDeErroNoLogin() {
+        return getText(errorMessage);
     }
 }

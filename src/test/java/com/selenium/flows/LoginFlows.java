@@ -3,6 +3,7 @@ package com.selenium.flows;
 import com.selenium.pages.LoginPage;
 
 public class LoginFlows {
+
     //Objects and constructor
     LoginPage loginPage;
 

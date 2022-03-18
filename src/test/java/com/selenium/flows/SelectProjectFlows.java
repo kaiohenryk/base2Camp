@@ -3,6 +3,7 @@ package com.selenium.flows;
 import com.selenium.pages.SelectProjectPage;
 
 public class SelectProjectFlows {
+
     //Objects and constructor
     SelectProjectPage selectProjectPage;
 

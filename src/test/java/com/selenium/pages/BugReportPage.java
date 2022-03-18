@@ -4,6 +4,7 @@ import com.selenium.bases.PageBase;
 import org.openqa.selenium.By;
 
 public class BugReportPage extends PageBase {
+
     //Mapping
     By categoryComboBox = By.name("category_id");
     By reproducibilityComboBox = By.name("reproducibility");

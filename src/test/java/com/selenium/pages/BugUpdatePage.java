@@ -4,6 +4,7 @@ import com.selenium.bases.PageBase;
 import org.openqa.selenium.By;
 
 public class BugUpdatePage extends PageBase {
+
     //Mapping
     By summaryField = By.name("summary");
     By updateInformationButton = By.cssSelector("input[value='Update Information']");

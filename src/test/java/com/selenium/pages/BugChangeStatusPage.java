@@ -4,6 +4,7 @@ import com.selenium.bases.PageBase;
 import org.openqa.selenium.By;
 
 public class BugChangeStatusPage extends PageBase {
+
     //Mapping
     By resolutionComboBox = By.name("resolution");
     By addNoteTextArea = By.name("bugnote_text");

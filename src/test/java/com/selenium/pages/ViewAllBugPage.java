@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class ViewAllBugPage extends PageBase {
+
     //Mapping
     By partialLinkEdit = By.cssSelector("a[href^='bug_update_page']");
     By partialLinkId = By.cssSelector("td > a[href^='/view.php?id=']");

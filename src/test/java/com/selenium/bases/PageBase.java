@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PageBase {
+
     //Global variables
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -60,11 +61,6 @@ public class PageBase {
     protected String getUrl() {
         String url = driver.getCurrentUrl();
         return url;
-    }
-
-    protected String getPageSource() {
-        String pageSource = driver.getPageSource();
-        return pageSource;
     }
 
     protected String getText(By locator) {
