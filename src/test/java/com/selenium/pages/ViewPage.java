@@ -22,24 +22,24 @@ public class ViewPage extends PageBase {
         return getText(locatorDoResumoDoBug(resumo));
     }
 
-    private By locatorDinamico(String textoDesejado) {
+    private By locatorParaEncontrarTextoNaTabela(String textoDesejado) {
         return By.xpath("//table//td[.='" + textoDesejado + "']");
     }
 
     public String retornaDescricaoDoBug(String descricao) {
-        return getText(locatorDinamico(descricao));
+        return getText(locatorParaEncontrarTextoNaTabela(descricao));
     }
 
     public String retornaPrioridadeDoBug(String prioridade) {
-        return getText(locatorDinamico(prioridade));
+        return getText(locatorParaEncontrarTextoNaTabela(prioridade));
     }
 
     public String retornaStatusDoBug(String status) {
-        return getText(locatorDinamico(status));
+        return getText(locatorParaEncontrarTextoNaTabela(status));
     }
 
     public String retornaPessoaAtribuidaDoBug(String pessoaAtribuida) {
-        return getText(locatorDinamico(pessoaAtribuida));
+        return getText(locatorParaEncontrarTextoNaTabela(pessoaAtribuida));
     }
 
     public void selecionarStatus(String status) {
