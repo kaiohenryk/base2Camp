@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="projetoBase2Camp" />
         <module name="ProjetoBase2camp" />
+        <module name="projetoBase2camp" />
       </profile>
     </annotationProcessing>
   </component>

@@ -1,8 +1,8 @@
 package com.selenium.bases;
 
 import com.selenium.GlobalParameters;
-import com.selenium.utils.DriverFactory;
-import com.selenium.utils.FileUtil;
+import com.selenium.utils.DriverUtils;
+import com.selenium.utils.Utils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -21,14 +21,14 @@ public class TestBase {
 
     @Before
     public void beforeTest() {
-        DriverFactory.createInstance();
-        DriverFactory.INSTANCE.manage().window().maximize();
-        DriverFactory.INSTANCE.navigate().to(GlobalParameters.URL_DEFAULT);
+        DriverUtils.createInstance();
+        DriverUtils.INSTANCE.manage().window().maximize();
+        DriverUtils.INSTANCE.navigate().to(GlobalParameters.URL_DEFAULT);
     }
 
     @After
     public void afterTest() {
-        FileUtil.screenshot(testName);
-        DriverFactory.quitInstance();
+        Utils.screenshot(testName);
+        DriverUtils.quitInstance();
     }
 }

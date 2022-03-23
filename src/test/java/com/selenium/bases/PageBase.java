@@ -1,6 +1,6 @@
 package com.selenium.bases;
 
-import com.selenium.utils.DriverFactory;
+import com.selenium.utils.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,8 +20,8 @@ public class PageBase {
 
     //Construtor
     public PageBase() {
-        driver = DriverFactory.INSTANCE;
-        wait = new WebDriverWait(DriverFactory.INSTANCE, Duration.ofSeconds(30));
+        driver = DriverUtils.INSTANCE;
+        wait = new WebDriverWait(DriverUtils.INSTANCE, Duration.ofSeconds(30));
     }
 
     //Custom Actions
@@ -78,7 +78,7 @@ public class PageBase {
     }
 
     protected List<WebElement> listOfElements(By locator) {
-        List<WebElement> elements = DriverFactory.INSTANCE.findElements(locator);
+        List<WebElement> elements = DriverUtils.INSTANCE.findElements(locator);
         return elements;
     }
 }
