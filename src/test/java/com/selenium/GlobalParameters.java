@@ -11,6 +11,7 @@ public class GlobalParameters {
     public static String BROWSER_DEFAULT;
     public static String EXECUTION;
     public static String URL_DEFAULT;
+    public static String URL_GRID;
     public static String USUARIO_DEFAULT;
     public static String SENHA_DEFAULT;
 
@@ -32,6 +33,7 @@ public class GlobalParameters {
         BROWSER_DEFAULT = properties.getProperty("browser.default");
         EXECUTION = properties.getProperty("execution");
         URL_DEFAULT = properties.getProperty("url.default");
+        URL_GRID = properties.getProperty("url.grid");
         USUARIO_DEFAULT = properties.getProperty("usuario.default");
         SENHA_DEFAULT = properties.getProperty("senha.default");
     }
