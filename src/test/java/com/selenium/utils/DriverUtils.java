@@ -22,8 +22,8 @@ public class DriverUtils {
         String execution = GlobalParameters.EXECUTION;
         String grid = GlobalParameters.URL_GRID;
         String browserErrorMessage = "O browser informado não existe ou não é suportado pela automação";
-        String gridErrorMessage = "Falha na conexão com o grid";
-        String executionErrorGrid = "O método de execução informado não existe ou não é suportado pela automação";
+        String gridErrorMessage = "Falha na conexão com o grid, verifique a URL informada";
+        String executionErrorMessage = "O método de execução informado não existe ou não é suportado pela automação";
 
         if (INSTANCE == null) {
             if (execution.equals("local")) {
@@ -90,7 +90,7 @@ public class DriverUtils {
 
             else {
                 try {
-                    throw new Exception(executionErrorGrid);
+                    throw new Exception(executionErrorMessage);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

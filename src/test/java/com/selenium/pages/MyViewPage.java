@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 public class MyViewPage extends PageBase {
 
     //Mapping
-    By linkText = By.linkText("Report Issue");
+    By reportIssueLinkText = By.linkText("Report Issue");
 
     //Actions
     public String retornaURLPaginaInicial() {
@@ -14,6 +14,6 @@ public class MyViewPage extends PageBase {
     }
 
     public void clicarEmReportarProblema() {
-        clickLinkText(linkText);
+        clickLinkText(reportIssueLinkText);
     }
 }

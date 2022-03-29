@@ -77,7 +77,7 @@ public class PageBase {
         return text;
     }
 
-    protected List<WebElement> listOfElements(By locator) {
+    protected List<WebElement> getListOfElements(By locator) {
         List<WebElement> elements = DriverUtils.INSTANCE.findElements(locator);
         return elements;
     }

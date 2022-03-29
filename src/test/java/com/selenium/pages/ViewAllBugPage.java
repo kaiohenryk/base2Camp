@@ -9,12 +9,12 @@ import java.util.List;
 public class ViewAllBugPage extends PageBase {
 
     //Mapping
-    By partialLinkEdit = By.cssSelector("a[href^='bug_update_page']");
-    By partialLinkId = By.cssSelector("td > a[href^='/view.php?id=']");
+    By partialLinkEdit = By.cssSelector("#buglist td > a[href^='bug_update_page']");
+    By partialLinkId = By.cssSelector("#buglist td > a[href^='/view.php?id=']");
     By searchField = By.name("search");
     By applyFilterButton = By.name("filter");
-    By bugTableRecords = By.xpath("//table[@id='buglist']//tr[@border='1']");
-    By bugSummary = By.xpath("//table[@id='buglist']//tr[@border='1']/td[@class='left']");
+    By bugTableRecords = By.cssSelector("#buglist tr[border='1']");
+    By bugSummary = By.cssSelector("#buglist tr[border='1'] > td[class='left']");
 
     //Actions
     public void clicarEmEditar() {
@@ -46,6 +46,6 @@ public class ViewAllBugPage extends PageBase {
     }
 
     public List<WebElement> quantidadeDeRegistrosEncontrados() {
-        return listOfElements(bugTableRecords);
+        return getListOfElements(bugTableRecords);
     }
 }

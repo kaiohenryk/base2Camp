@@ -9,7 +9,7 @@ public class LoginPage extends PageBase {
     By usernameField = By.name("username");
     By passwordField = By.name("password");
     By loginButton = By.cssSelector("input[value='Login']");
-    By errorMessage = By.xpath("//div//font[@color='red']");
+    By errorMessage = By.cssSelector("div > font[color='red']");
 
     //Actions
     public void preencherUsuario(String usuario) {
