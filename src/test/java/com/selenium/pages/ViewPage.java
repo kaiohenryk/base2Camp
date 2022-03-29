@@ -22,8 +22,8 @@ public class ViewPage extends PageBase {
         return getText(locatorDoResumoDoBug(resumo));
     }
 
-    private By locatorParaEncontrarTextoNaTabela(String textoDesejado) {
-        return By.xpath("//table//td[.='" + textoDesejado + "']");
+    private By locatorParaEncontrarTextoNaTabela(String texto) {
+        return By.xpath("//table//td[.='" + texto + "']");
     }
 
     public String retornaDescricaoDoBug(String descricao) {
@@ -54,7 +54,7 @@ public class ViewPage extends PageBase {
         click(changeStatusButton);
     }
 
-    public void clicarEmAtribuir() {
+    public void clicarEmAtribuirA() {
         click(assignToButton);
     }
 

@@ -9,43 +9,58 @@ import java.util.List;
 public class ViewAllBugPage extends PageBase {
 
     //Mapping
-    By partialLinkEdit = By.cssSelector("#buglist td > a[href^='bug_update_page']");
-    By partialLinkId = By.cssSelector("#buglist td > a[href^='/view.php?id=']");
+    By editPartialLink = By.cssSelector("#buglist td > a[href^='bug_update_page']");
+    By idPartialLink = By.cssSelector("#buglist td > a[href^='/view.php?id=']");
+    By assignedToLink = By.id("handler_id_filter");
     By searchField = By.name("search");
     By applyFilterButton = By.name("filter");
     By bugTableRecords = By.cssSelector("#buglist tr[border='1']");
     By bugSummary = By.cssSelector("#buglist tr[border='1'] > td[class='left']");
+    By assignedToComboBox = By.name("handler_id[]");
+    By assignedStatusLink = By.cssSelector("#buglist td a[href='https://mantis-prova.base2.com.br/view_user_page.php?id=314']");
 
     //Actions
-    public void clicarEmEditar() {
-        clickPartialLink(partialLinkEdit);
+    public void clicarEmEditarBug() {
+        clickPartialLink(editPartialLink);
     }
 
     public void clicarNoIdDoBug() {
-        clickPartialLink(partialLinkId);
+        clickPartialLink(idPartialLink);
     }
 
-    public String obterIdDoBug() {
-        return getText(partialLinkId);
-    }
-
-    public List<String> IdDosBugsCadastrados() {
-        return getTextList(partialLinkId);
-    }
-
-    public List<String> ResumoDosBugsCadastrados() {
-        return getTextList(bugSummary);
-    }
-
-    public void preencherCampoProcurar(String idDoBug) {
-        sendKeys(searchField, idDoBug);
+    public void clicarEmAtribuidoA() {
+        clickLinkText(assignedToLink);
     }
 
     public void clicarEmAplicarFiltro() {
         click(applyFilterButton);
     }
 
+    public void preencherCampoProcurar(String texto) {
+        sendKeys(searchField, texto);
+    }
+
+    public String obterIdDoBug() {
+        return getText(idPartialLink);
+    }
+
+    public List<String> idsDosBugsCadastrados() {
+        return getTextList(idPartialLink);
+    }
+
+    public List<String> resumosDosBugsCadastrados() {
+        return getTextList(bugSummary);
+    }
+
+    public List<String> pessoasAtribuidasParaOsBugs() {
+        return getTextList(assignedStatusLink);
+    }
+
     public List<WebElement> quantidadeDeRegistrosEncontrados() {
         return getListOfElements(bugTableRecords);
+    }
+
+    public void selecionarPessoaAtribuida(String pessoaAtribuida) {
+        comboBoxSelectByVisibleText(assignedToComboBox, pessoaAtribuida);
     }
 }

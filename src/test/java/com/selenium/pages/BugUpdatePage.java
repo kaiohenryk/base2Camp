@@ -12,9 +12,9 @@ public class BugUpdatePage extends PageBase {
     By descriptionTextArea = By.name("description");
 
     //Actions
-    public void preencherResumo(String novoResumo) {
+    public void preencherResumo(String resumo) {
         clear(summaryField);
-        sendKeys(summaryField, novoResumo);
+        sendKeys(summaryField, resumo);
     }
 
     public void preencherDescricao(String descricao) {

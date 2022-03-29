@@ -14,6 +14,7 @@ public class BugReportPage extends PageBase {
     By assignToComboBox = By.name("handler_id");
     By summaryField = By.name("summary");
     By descriptionTextArea = By.name("description");
+    By stepsToReproduceTextArea = By.name("steps_to_reproduce");
     By submitReportButton = By.cssSelector("input[value='Submit Report']");
     By successMessage = By.xpath("//div[contains(text(),'Operation successful.')]");
 
@@ -50,11 +51,15 @@ public class BugReportPage extends PageBase {
         sendKeys(descriptionTextArea, descricao);
     }
 
+    public void preencherPassoAPasso(String passoAPasso) {
+        sendKeys(stepsToReproduceTextArea, passoAPasso);
+    }
+
     public void clicarNoBotaoEnviarRelatorio() {
         click(submitReportButton);
     }
 
-    public String retornaMensagemSucesso() {
+    public String retornaMensagemDeSucesso() {
         return getText(successMessage);
     }
 }

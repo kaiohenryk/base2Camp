@@ -16,15 +16,15 @@ public class BugChangeStatusPage extends PageBase {
         comboBoxSelectByVisibleText(resolutionComboBox, tipoResolucao);
     }
 
-    public void adicionarNota(String nota){
+    public void adicionarNota(String nota) {
         sendKeys(addNoteTextArea, nota);
     }
 
-    public void clicarEmResolverProblema(){
+    public void clicarEmResolverProblema() {
         click(resolveIssueButton);
     }
 
-    public void clicarEmFecharProblema(){
+    public void clicarEmFecharProblema() {
         click(closeIssueButton);
     }
 }

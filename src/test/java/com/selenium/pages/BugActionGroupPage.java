@@ -9,7 +9,7 @@ public class BugActionGroupPage extends PageBase {
     By deleteIssuesButton = By.cssSelector("input[value='Delete Issues']");
 
     //Actions
-    public void clicarEmExcluirProblema(){
+    public void clicarEmExcluirProblema() {
         click(deleteIssuesButton);
     }
 }

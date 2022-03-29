@@ -2,9 +2,7 @@ package com.selenium.tests;
 
 import com.selenium.GlobalParameters;
 import com.selenium.bases.TestBase;
-import com.selenium.flows.BugReportFlows;
 import com.selenium.flows.LoginFlows;
-import com.selenium.flows.SelectProjectFlows;
 import com.selenium.pages.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,8 +12,7 @@ public class BugTests extends TestBase {
     //Objects
     LoginFlows loginFlows;
     MyViewPage myViewPage;
-    SelectProjectFlows selectProjectFlows;
-    BugReportFlows bugReportFlows;
+    SelectProjectPage selectProjectPage;
     BugReportPage bugReportPage;
     ViewAllBugPage viewAllBugPage;
     BugUpdatePage bugUpdatePage;
@@ -30,27 +27,29 @@ public class BugTests extends TestBase {
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
-        selectProjectFlows = new SelectProjectFlows();
+        selectProjectPage = new SelectProjectPage();
         bugReportPage = new BugReportPage();
 
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
         String senha = GlobalParameters.SENHA_DEFAULT;
         String projeto = "Fabiana Carvalho´s Project";
-        String categoria = "[All Projects] Teste";
+        String categoria = "[All Projects] Teste Caio";
         String reprodutibilidade = "random";
         String severidade = "major";
         String prioridade = "urgent";
         String perfil = "Desktop Windows 10";
         String pessoaAtribuida = "caio.carvalho";
-        String resumo = "Teste do Caio";
-        String descricao = "Projeto final do Base2camp";
+        String resumo = "Projeto Base2Camp - Caio Carvalho";
+        String descricao = "Projeto final";
+        String passoAPasso = "1- Fazer o meu melhor no base2Camp\n2- Entrar para o time da base2\n3- Caio Feliz =) ";
         String mensagemEsperada = "Operation successful.";
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
         myViewPage.clicarEmReportarProblema();
-        selectProjectFlows.selecionarProjeto(projeto);
+        selectProjectPage.selecionarProjeto(projeto);
+        selectProjectPage.clicarNoBotaoSelecionarProjeto();
         bugReportPage.selecionarCategoria(categoria);
         bugReportPage.selecionarReprodutibilidade(reprodutibilidade);
         bugReportPage.selecionarSeveridade(severidade);
@@ -59,9 +58,10 @@ public class BugTests extends TestBase {
         bugReportPage.selecionarPessoaAtribuida(pessoaAtribuida);
         bugReportPage.preencherResumo(resumo);
         bugReportPage.preencherDescricao(descricao);
+        bugReportPage.preencherPassoAPasso(passoAPasso);
         bugReportPage.clicarNoBotaoEnviarRelatorio();
 
-        Assert.assertTrue(bugReportPage.retornaMensagemSucesso().contains(mensagemEsperada));
+        Assert.assertTrue(bugReportPage.retornaMensagemDeSucesso().contains(mensagemEsperada));
     }
 
     @Test
@@ -70,8 +70,6 @@ public class BugTests extends TestBase {
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
-        selectProjectFlows = new SelectProjectFlows();
-        bugReportFlows = new BugReportFlows();
         viewAllBugPage = new ViewAllBugPage();
         bugUpdatePage = new BugUpdatePage();
         viewPage = new ViewPage();
@@ -79,36 +77,24 @@ public class BugTests extends TestBase {
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
         String senha = GlobalParameters.SENHA_DEFAULT;
-        String projeto = "Fabiana Carvalho´s Project";
-        String categoria = "[All Projects] Teste Caio";
-        String reprodutibilidade = "random";
-        String severidade = "major";
-        String prioridade = "normal";
-        String perfil = "Desktop Windows 10";
-        String pessoaAtribuida = "caio.carvalho";
-        String resumo = "Teste do Caio";
-        String descricao = "Projeto final do Base2camp";
-        String novoResumo = "Editando";
+        String resumo = "Editando o resumo do Bug";
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
-        myViewPage.clicarEmReportarProblema();
-        selectProjectFlows.selecionarProjeto(projeto);
-        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
-        viewAllBugPage.clicarEmEditar();
-        bugUpdatePage.preencherResumo(novoResumo);
+        myViewPage.clicarEmVerProblemas();
+        viewAllBugPage.clicarEmEditarBug();
+        bugUpdatePage.preencherResumo(resumo);
         bugUpdatePage.clicarEmAtualizarInformacao();
 
-        Assert.assertTrue(viewPage.retornaResumoDoBug(novoResumo).contains(novoResumo));
+        Assert.assertTrue(viewPage.retornaResumoDoBug(resumo).contains(resumo));
     }
 
     @Test
     public void alterarDescricaoDoBug() {
+
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
-        selectProjectFlows = new SelectProjectFlows();
-        bugReportFlows = new BugReportFlows();
         viewAllBugPage = new ViewAllBugPage();
         bugUpdatePage = new BugUpdatePage();
         viewPage = new ViewPage();
@@ -116,27 +102,16 @@ public class BugTests extends TestBase {
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
         String senha = GlobalParameters.SENHA_DEFAULT;
-        String projeto = "Fabiana Carvalho´s Project";
-        String categoria = "[All Projects] Teste Caio";
-        String reprodutibilidade = "random";
-        String severidade = "major";
-        String prioridade = "normal";
-        String perfil = "Desktop Windows 10";
-        String pessoaAtribuida = "caio.carvalho";
-        String resumo = "Teste do Caio";
-        String descricao = "Projeto final do Base2camp";
-        String novaDescricao = "Alterando a descrição do Bug";
+        String descricao = "Alterando a descrição do Bug";
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
-        myViewPage.clicarEmReportarProblema();
-        selectProjectFlows.selecionarProjeto(projeto);
-        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
-        viewAllBugPage.clicarEmEditar();
-        bugUpdatePage.preencherDescricao(novaDescricao);
+        myViewPage.clicarEmVerProblemas();
+        viewAllBugPage.clicarEmEditarBug();
+        bugUpdatePage.preencherDescricao(descricao);
         bugUpdatePage.clicarEmAtualizarInformacao();
 
-        Assert.assertEquals(novaDescricao, viewPage.retornaDescricaoDoBug(novaDescricao));
+        Assert.assertEquals(descricao, viewPage.retornaDescricaoDoBug(descricao));
     }
 
     @Test
@@ -145,35 +120,22 @@ public class BugTests extends TestBase {
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
-        selectProjectFlows = new SelectProjectFlows();
-        bugReportFlows = new BugReportFlows();
         viewAllBugPage = new ViewAllBugPage();
         viewPage = new ViewPage();
 
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
         String senha = GlobalParameters.SENHA_DEFAULT;
-        String projeto = "Fabiana Carvalho´s Project";
-        String categoria = "[All Projects] Teste Caio";
-        String reprodutibilidade = "random";
-        String severidade = "major";
-        String prioridade = "normal";
-        String perfil = "Desktop Windows 10";
-        String pessoaAtribuida = "caio.carvalho";
-        String resumo = "Teste do Caio";
-        String descricao = "Projeto final do Base2camp";
-        String novaPessoaAtribuida = "Treinamento07";
+        String pessoaAtribuida = "Treinamento07";
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
-        myViewPage.clicarEmReportarProblema();
-        selectProjectFlows.selecionarProjeto(projeto);
-        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        myViewPage.clicarEmVerProblemas();
         viewAllBugPage.clicarNoIdDoBug();
-        viewPage.selecionarPessoaAtribuida(novaPessoaAtribuida);
-        viewPage.clicarEmAtribuir();
+        viewPage.selecionarPessoaAtribuida(pessoaAtribuida);
+        viewPage.clicarEmAtribuirA();
 
-        Assert.assertEquals(novaPessoaAtribuida, viewPage.retornaPessoaAtribuidaDoBug(novaPessoaAtribuida));
+        Assert.assertEquals(pessoaAtribuida, viewPage.retornaPessoaAtribuidaDoBug(pessoaAtribuida));
     }
 
     @Test
@@ -182,8 +144,6 @@ public class BugTests extends TestBase {
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
-        selectProjectFlows = new SelectProjectFlows();
-        bugReportFlows = new BugReportFlows();
         viewAllBugPage = new ViewAllBugPage();
         bugUpdatePage = new BugUpdatePage();
         viewPage = new ViewPage();
@@ -191,37 +151,25 @@ public class BugTests extends TestBase {
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
         String senha = GlobalParameters.SENHA_DEFAULT;
-        String projeto = "Fabiana Carvalho´s Project";
-        String categoria = "[All Projects] Teste Caio";
-        String reprodutibilidade = "random";
-        String severidade = "major";
-        String prioridade = "normal";
-        String perfil = "Desktop Windows 10";
-        String pessoaAtribuida = "caio.carvalho";
-        String resumo = "Teste do Caio";
-        String descricao = "Projeto final do Base2camp";
-        String novaPrioridade = "urgent";
+        String prioridade = "urgent";
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
-        myViewPage.clicarEmReportarProblema();
-        selectProjectFlows.selecionarProjeto(projeto);
-        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
-        viewAllBugPage.clicarEmEditar();
-        bugUpdatePage.selecionarPrioridade(novaPrioridade);
+        myViewPage.clicarEmVerProblemas();
+        viewAllBugPage.clicarEmEditarBug();
+        bugUpdatePage.selecionarPrioridade(prioridade);
         bugUpdatePage.clicarEmAtualizarInformacao();
 
-        Assert.assertEquals(novaPrioridade, viewPage.retornaPrioridadeDoBug(novaPrioridade));
+        Assert.assertEquals(prioridade, viewPage.retornaPrioridadeDoBug(prioridade));
     }
 
     @Test
     public void alterarStatusDoBugParaResolvido() {
+        //MASSA DE DADOS: Necessário inserir um BUG com status diferente de resolved.
 
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
-        selectProjectFlows = new SelectProjectFlows();
-        bugReportFlows = new BugReportFlows();
         viewAllBugPage = new ViewAllBugPage();
         viewPage = new ViewPage();
         bugChangeStatusPage = new BugChangeStatusPage();
@@ -229,24 +177,13 @@ public class BugTests extends TestBase {
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
         String senha = GlobalParameters.SENHA_DEFAULT;
-        String projeto = "Fabiana Carvalho´s Project";
-        String categoria = "[All Projects] Teste Caio";
-        String reprodutibilidade = "random";
-        String severidade = "major";
-        String prioridade = "normal";
-        String perfil = "Desktop Windows 10";
-        String pessoaAtribuida = "caio.carvalho";
-        String resumo = "Teste do Caio";
-        String descricao = "Projeto final do Base2camp";
         String status = "resolved";
         String resolucao = "fixed";
         String nota = "A equipe corrigiu o Bug";
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
-        myViewPage.clicarEmReportarProblema();
-        selectProjectFlows.selecionarProjeto(projeto);
-        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        myViewPage.clicarEmVerProblemas();
         viewAllBugPage.clicarNoIdDoBug();
         viewPage.selecionarStatus(status);
         viewPage.clicarEmAlterarStatus();
@@ -259,12 +196,11 @@ public class BugTests extends TestBase {
 
     @Test
     public void fecharBugComSucesso() {
+        //MASSA DE DADOS: Necessário inserir um BUG com status diferente de closed.
 
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
-        selectProjectFlows = new SelectProjectFlows();
-        bugReportFlows = new BugReportFlows();
         viewAllBugPage = new ViewAllBugPage();
         viewPage = new ViewPage();
         bugChangeStatusPage = new BugChangeStatusPage();
@@ -272,24 +208,13 @@ public class BugTests extends TestBase {
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
         String senha = GlobalParameters.SENHA_DEFAULT;
-        String projeto = "Fabiana Carvalho´s Project";
-        String categoria = "[All Projects] Teste Caio";
-        String reprodutibilidade = "random";
-        String severidade = "major";
-        String prioridade = "normal";
-        String perfil = "Desktop Windows 10";
-        String pessoaAtribuida = "caio.carvalho";
-        String resumo = "Teste do Caio";
-        String descricao = "Projeto final do Base2camp";
         String resolucao = "fixed";
         String nota = "Bug corrigido";
         String status = "closed";
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
-        myViewPage.clicarEmReportarProblema();
-        selectProjectFlows.selecionarProjeto(projeto);
-        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        myViewPage.clicarEmVerProblemas();
         viewAllBugPage.clicarNoIdDoBug();
         viewPage.clicarEmFechar();
         bugChangeStatusPage.selecionarTipoDaResolucao(resolucao);
@@ -305,8 +230,6 @@ public class BugTests extends TestBase {
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
-        selectProjectFlows = new SelectProjectFlows();
-        bugReportFlows = new BugReportFlows();
         viewAllBugPage = new ViewAllBugPage();
         viewPage = new ViewPage();
         bugActionGroupPage = new BugActionGroupPage();
@@ -314,65 +237,42 @@ public class BugTests extends TestBase {
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
         String senha = GlobalParameters.SENHA_DEFAULT;
-        String projeto = "Fabiana Carvalho´s Project";
-        String categoria = "[All Projects] Teste Caio";
-        String reprodutibilidade = "random";
-        String severidade = "major";
-        String prioridade = "normal";
-        String perfil = "Desktop Windows 10";
-        String pessoaAtribuida = "caio.carvalho";
-        String resumo = "Teste do Caio";
-        String descricao = "Projeto final do Base2camp";
         String idDoBug;
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
-        myViewPage.clicarEmReportarProblema();
-        selectProjectFlows.selecionarProjeto(projeto);
-        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        myViewPage.clicarEmVerProblemas();
         idDoBug = viewAllBugPage.obterIdDoBug();
         viewAllBugPage.clicarNoIdDoBug();
         viewPage.clicarEmExcluir();
         bugActionGroupPage.clicarEmExcluirProblema();
 
-        Assert.assertFalse(viewAllBugPage.IdDosBugsCadastrados().contains(idDoBug));
+        Assert.assertFalse(viewAllBugPage.idsDosBugsCadastrados().contains(idDoBug));
     }
 
     @Test
     public void filtrarBugPorId() {
+
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
-        selectProjectFlows = new SelectProjectFlows();
-        bugReportFlows = new BugReportFlows();
         viewAllBugPage = new ViewAllBugPage();
 
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
         String senha = GlobalParameters.SENHA_DEFAULT;
-        String projeto = "Fabiana Carvalho´s Project";
-        String categoria = "[All Projects] Teste";
-        String reprodutibilidade = "random";
-        String severidade = "major";
-        String prioridade = "urgent";
-        String perfil = "Desktop Windows 10";
-        String pessoaAtribuida = "caio.carvalho";
-        String resumo = "Teste do Caio";
-        String descricao = "Projeto final do Base2camp";
         String idDoBug;
         int quantidadeDeRegistrosEsperados = 1;
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
-        myViewPage.clicarEmReportarProblema();
-        selectProjectFlows.selecionarProjeto(projeto);
-        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        myViewPage.clicarEmVerProblemas();
         idDoBug = viewAllBugPage.obterIdDoBug();
         viewAllBugPage.preencherCampoProcurar(idDoBug);
         viewAllBugPage.clicarEmAplicarFiltro();
 
         Assert.assertEquals(quantidadeDeRegistrosEsperados, viewAllBugPage.quantidadeDeRegistrosEncontrados().size());
-        Assert.assertTrue(viewAllBugPage.IdDosBugsCadastrados().contains(idDoBug));
+        Assert.assertTrue(viewAllBugPage.idsDosBugsCadastrados().contains(idDoBug));
     }
 
     @Test
@@ -381,31 +281,42 @@ public class BugTests extends TestBase {
         //Objects instances
         loginFlows = new LoginFlows();
         myViewPage = new MyViewPage();
-        selectProjectFlows = new SelectProjectFlows();
-        bugReportFlows = new BugReportFlows();
         viewAllBugPage = new ViewAllBugPage();
 
         //Parameters
         String usuario = GlobalParameters.USUARIO_DEFAULT;
         String senha = GlobalParameters.SENHA_DEFAULT;
-        String projeto = "Fabiana Carvalho´s Project";
-        String categoria = "[All Projects] Teste";
-        String reprodutibilidade = "random";
-        String severidade = "major";
-        String prioridade = "urgent";
-        String perfil = "Desktop Windows 10";
-        String pessoaAtribuida = "caio.carvalho";
-        String resumo = "Editanduuu";
-        String descricao = "Projeto final do Base2camp";
+        String resumo = "Teste do Caio";
 
         //Test
         loginFlows.efetuarLogin(usuario, senha);
-        myViewPage.clicarEmReportarProblema();
-        selectProjectFlows.selecionarProjeto(projeto);
-        bugReportFlows.reportarBug(categoria, reprodutibilidade, severidade, prioridade, perfil, pessoaAtribuida, resumo, descricao);
+        myViewPage.clicarEmVerProblemas();
         viewAllBugPage.preencherCampoProcurar(resumo);
         viewAllBugPage.clicarEmAplicarFiltro();
 
-        Assert.assertTrue(viewAllBugPage.ResumoDosBugsCadastrados().contains(resumo));
+        Assert.assertTrue(viewAllBugPage.resumosDosBugsCadastrados().contains(resumo));
+    }
+
+    @Test
+    public void filtrarBugPorPessoaAtribuida() {
+
+        //Objects instances
+        loginFlows = new LoginFlows();
+        myViewPage = new MyViewPage();
+        viewAllBugPage = new ViewAllBugPage();
+
+        //Parameters
+        String usuario = GlobalParameters.USUARIO_DEFAULT;
+        String senha = GlobalParameters.SENHA_DEFAULT;
+        String pessoaAtribuida = "caio.carvalho";
+
+        //Test
+        loginFlows.efetuarLogin(usuario, senha);
+        myViewPage.clicarEmVerProblemas();
+        viewAllBugPage.clicarEmAtribuidoA();
+        viewAllBugPage.selecionarPessoaAtribuida(pessoaAtribuida);
+        viewAllBugPage.clicarEmAplicarFiltro();
+
+        Assert.assertTrue(viewAllBugPage.pessoasAtribuidasParaOsBugs().contains(pessoaAtribuida));
     }
 }

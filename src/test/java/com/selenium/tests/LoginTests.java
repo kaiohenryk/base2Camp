@@ -27,6 +27,7 @@ public class LoginTests extends TestBase {
         String senha = GlobalParameters.SENHA_DEFAULT;
         String paginaInicialEsperada = "https://mantis-prova.base2.com.br/my_view_page.php";
 
+        //Test
         loginPage.preencherUsuario(usuario);
         loginPage.preencherSenha(senha);
         loginPage.clicarNoBotaoLogin();

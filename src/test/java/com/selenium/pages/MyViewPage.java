@@ -7,6 +7,7 @@ public class MyViewPage extends PageBase {
 
     //Mapping
     By reportIssueLinkText = By.linkText("Report Issue");
+    By viewIssuesLinkText = By.linkText("View Issues");
 
     //Actions
     public String retornaURLPaginaInicial() {
@@ -15,5 +16,9 @@ public class MyViewPage extends PageBase {
 
     public void clicarEmReportarProblema() {
         clickLinkText(reportIssueLinkText);
+    }
+
+    public void clicarEmVerProblemas() {
+        clickLinkText(viewIssuesLinkText);
     }
 }
