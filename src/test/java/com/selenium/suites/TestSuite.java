@@ -1,4 +1,4 @@
-package com.selenium.suite;
+package com.selenium.suites;
 
 import com.selenium.tests.BugTests;
 import com.selenium.tests.LoginTests;
@@ -10,5 +10,5 @@ import org.junit.runners.Suite;
         LoginTests.class,
         BugTests.class
 })
-public class SuiteTest {
+public class TestSuite {
 }

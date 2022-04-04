@@ -66,6 +66,7 @@ public class BugTests extends TestBase {
 
     @Test
     public void alterarResumoDoBug() {
+        //MASSA DE DADOS: Necessário ter um BUG cadastrado.
 
         //Objects instances
         loginFlows = new LoginFlows();
@@ -91,6 +92,7 @@ public class BugTests extends TestBase {
 
     @Test
     public void alterarDescricaoDoBug() {
+        //MASSA DE DADOS: Necessário ter um BUG cadastrado.
 
         //Objects instances
         loginFlows = new LoginFlows();
@@ -116,6 +118,7 @@ public class BugTests extends TestBase {
 
     @Test
     public void alterarPessoaAtribuidaDoBug() {
+        //MASSA DE DADOS: Necessário ter um BUG cadastrado.
 
         //Objects instances
         loginFlows = new LoginFlows();
@@ -140,6 +143,7 @@ public class BugTests extends TestBase {
 
     @Test
     public void alterarPrioridadeDoBugParaUrgente() {
+        //MASSA DE DADOS: Necessário inserir um BUG com status diferente de urgent.
 
         //Objects instances
         loginFlows = new LoginFlows();
@@ -226,6 +230,7 @@ public class BugTests extends TestBase {
 
     @Test
     public void excluirBug() {
+        //MASSA DE DADOS: Necessário ter um BUG cadastrado.
 
         //Objects instances
         loginFlows = new LoginFlows();
@@ -252,6 +257,7 @@ public class BugTests extends TestBase {
 
     @Test
     public void filtrarBugPorId() {
+        //MASSA DE DADOS: Necessário ter um BUG cadastrado.
 
         //Objects instances
         loginFlows = new LoginFlows();
@@ -277,6 +283,7 @@ public class BugTests extends TestBase {
 
     @Test
     public void filtrarBugPorResumo() {
+        //MASSA DE DADOS: Necessário ter um BUG cadastrado com o resumo Teste do Caio.
 
         //Objects instances
         loginFlows = new LoginFlows();
@@ -299,6 +306,7 @@ public class BugTests extends TestBase {
 
     @Test
     public void filtrarBugPorPessoaAtribuida() {
+        //MASSA DE DADOS: Necessário ter um BUG cadastrado e atribuído para caio.carvalho.
 
         //Objects instances
         loginFlows = new LoginFlows();
